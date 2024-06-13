@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wordhunt/models/widget_tree.dart';
 import 'package:wordhunt/pages/login_register_page.dart';
 import 'package:wordhunt/providers/auth.dart';
 import 'package:wordhunt/providers/theme_provider.dart';
@@ -60,7 +61,7 @@ class Settings extends StatelessWidget {
                 await auth.signOut();
 
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => LoginRegister()),
+                    MaterialPageRoute(builder: (context) => WidgetTree()),
                     (Route<dynamic> route) => false);
               },
               child: Text('Sign Out')),

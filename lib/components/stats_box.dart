@@ -26,38 +26,38 @@ class StatsBox extends StatelessWidget {
             textAlign: TextAlign.center,
           )),
           Expanded(
-              child: FutureBuilder(
-            future: getStats(),
-            builder: (context, snapshot) {
-              List<String> results = ['0', '0', '0', '0', '0'];
-              if (snapshot.hasData) {
-                results = snapshot.data as List<String>;
-              }
-              return Row(
-                children: [
-                  StatsTile(
-                    heading: "Played",
-                    value: int.parse(results[0]),
-                  ),
-                  StatsTile(
-                    heading: "Win %",
-                    value: int.parse(results[2]),
-                  ),
-                  StatsTile(
-                    heading: "Current\nStreak",
-                    value: int.parse(results[3]),
-                  ),
-                  StatsTile(
-                    heading: "Max\nStreak",
-                    value: int.parse(results[4]),
-                  ),
-                ],
-              );
-            },
-          ),
+            child: FutureBuilder(
+              future: getStatsFromFirestore(),
+              builder: (context, snapshot) {
+                List<String> results = ['0', '0', '0', '0', '0'];
+                if (snapshot.hasData) {
+                  results = snapshot.data as List<String>;
+                }
+                return Row(
+                  children: [
+                    StatsTile(
+                      heading: "Played",
+                      value: int.parse(results[0]),
+                    ),
+                    StatsTile(
+                      heading: "Win %",
+                      value: int.parse(results[2]),
+                    ),
+                    StatsTile(
+                      heading: "Current\nStreak",
+                      value: int.parse(results[3]),
+                    ),
+                    StatsTile(
+                      heading: "Max\nStreak",
+                      value: int.parse(results[4]),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
           const Expanded(
-            flex: 5, 
+            flex: 5,
             child: Divider(
               height: 3,
               thickness: 2,
