@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "294742962315",
+    "project_id": "wordhunt-flutter",
+    "storage_bucket": "wordhunt-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294742962315:android:e21f83174d577e1b18a48e",
+        "android_client_info": {
+          "package_name": "com.example.wordhunt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm-CvV2HbVjFmKl77kMQrF30vfr-Gths0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
