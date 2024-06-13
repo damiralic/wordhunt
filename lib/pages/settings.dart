@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wordhunt/pages/login_register_page.dart';
+import 'package:wordhunt/providers/auth.dart';
 import 'package:wordhunt/providers/theme_provider.dart';
 import 'package:wordhunt/utils/quick_box.dart';
 import 'package:wordhunt/utils/theme_preferences.dart';
 
 class Settings extends StatelessWidget {
-  const Settings({super.key});
+  Settings({super.key});
+
+  final Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +47,23 @@ class Settings extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Reset Stats'),
-            onTap: () async{
+            onTap: () async {
               final prefs = await SharedPreferences.getInstance();
               prefs.remove('stats');
               prefs.remove('chart');
               prefs.remove('row');
               runQuickBox(context: context, message: 'Stats Cleared!');
             },
-          )
+          ),
+          ElevatedButton(
+              onPressed: () async {
+                await auth.signOut();
+
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => LoginRegister()),
+                    (Route<dynamic> route) => false);
+              },
+              child: Text('Sign Out')),
         ],
       ),
     );
