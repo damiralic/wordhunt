@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,8 +66,19 @@ class Settings extends StatelessWidget {
                     (Route<dynamic> route) => false);
               },
               child: Text('Sign Out')),
+          Text(getCurrentUserEmail()),
         ],
       ),
     );
+  }
+
+  String getCurrentUserEmail() {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return user.email ??
+          ''; // Return user's email if available, or an empty string
+    } else {
+      return ''; // Return empty string if no user is signed in
+    }
   }
 }
