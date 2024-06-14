@@ -7,6 +7,7 @@ import 'package:wordhunt/models/widget_tree.dart';
 import 'package:wordhunt/pages/settings.dart';
 import 'package:wordhunt/providers/controller.dart';
 import 'package:wordhunt/pages/home_page.dart';
+import 'package:wordhunt/providers/firebase_api.dart';
 import 'package:wordhunt/providers/theme_provider.dart';
 import 'package:wordhunt/utils/theme_preferences.dart';
 import 'package:wordhunt/constants/themes.dart';
@@ -15,6 +16,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseApi().initNotifications();
   runApp(const MyApp());
 }
 
