@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:wordhunt/components/grid.dart';
 import 'package:wordhunt/components/keyboard_row.dart';
@@ -14,6 +16,7 @@ import 'package:wordhunt/utils/quick_box.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+  static String countryCodeIso = "";
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     initializeWord();
+    getCountryCodeName();
     super.initState();
   }
 
@@ -42,6 +46,22 @@ class _HomePageState extends State<HomePage> {
       print("No words fetched from Firebase");
       // fallback to local words
     }
+  }
+
+  Future<String> getCountryCodeName() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      await Geolocator.requestPermission();
+    }
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    List<Placemark> address =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark placeMark = address.first;
+    String country = placeMark.isoCountryCode.toString();
+    print(country);
+    HomePage.countryCodeIso = country;
+    return country; // this will return country }
   }
 
   @override
@@ -79,8 +99,7 @@ class _HomePageState extends State<HomePage> {
                   const Duration(milliseconds: 1500),
                   () {
                     if (mounted) {
-                      showDialog(
-                          context: context, builder: (_) => const StatsBox());
+                      showDialog(context: context, builder: (_) => StatsBox());
                     }
                   },
                 );

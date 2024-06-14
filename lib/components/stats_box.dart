@@ -1,4 +1,7 @@
+import 'package:country_icons/country_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:wordhunt/pages/home_page.dart';
+import 'package:wordhunt/pages/leaderboard_page.dart';
 import 'package:wordhunt/utils/calculate_stats.dart';
 import 'package:wordhunt/components/stats_tile.dart';
 import 'package:wordhunt/constants/answer_stages.dart';
@@ -6,7 +9,7 @@ import 'package:wordhunt/data/keys_map.dart';
 import 'package:wordhunt/main.dart';
 
 class StatsBox extends StatelessWidget {
-  const StatsBox({super.key});
+  StatsBox({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,12 @@ class StatsBox extends StatelessWidget {
               child: Text(
             "STATISTICS",
             textAlign: TextAlign.center,
+          )),
+          Center(
+              child: SizedBox(
+            width: 50,
+            height: 30,
+            child: CountryIcons.getSvgFlag(HomePage.countryCodeIso),
           )),
           Expanded(
             child: FutureBuilder(
@@ -62,6 +71,13 @@ class StatsBox extends StatelessWidget {
               height: 3,
               thickness: 2,
             ),
+          ),
+          ListTile(
+            title: const Text('Pregledaj Tablicu'),
+            onTap: () async {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => LeaderboardPage()));
+            },
           ),
           Expanded(
               flex: 1,

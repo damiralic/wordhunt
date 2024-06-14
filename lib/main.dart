@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:wordhunt/constants/colors.dart';
 import 'package:wordhunt/firebase_options.dart';
 import 'package:wordhunt/models/widget_tree.dart';
+import 'package:wordhunt/pages/leaderboard_page.dart';
 import 'package:wordhunt/pages/settings.dart';
 import 'package:wordhunt/providers/controller.dart';
 import 'package:wordhunt/pages/home_page.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Controller()),
-        ChangeNotifierProvider(create: (_) => ThemeProvider())
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: FutureBuilder(
         initialData: false,
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'WordHunt',
               theme: notifier.isDark ? darkTheme : lightTheme,
-              home: const WidgetTree(),
+              home: WidgetTree(),
             ),
           );
         },
